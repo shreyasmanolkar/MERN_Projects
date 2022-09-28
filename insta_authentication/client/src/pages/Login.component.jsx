@@ -1,7 +1,10 @@
 import React, {useState} from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import "./Login.styles.css";
 
 function Login(){
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +23,11 @@ function Login(){
             })
         });
         const data = await response.json();
-        console.log(data);
+
+        if(data.status){
+            navigate('/');
+        }
+
         setEmail("");
         setPassword("");
     };
@@ -46,7 +53,7 @@ function Login(){
             </form>
         </div><br />
         <div className="redirectBox">
-            <p className="simplePara">Don't have an account? <a href="">Sign up</a></p>
+            <p className="simplePara">Don't have an account? <Link to="/register">Sign up</Link></p>
         </div>
 
         </>

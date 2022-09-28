@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'fontspring_demo_-_blue_vinyBd';
+    src: url('../../public/webfontkit-20220927-233145/fontspring-demo-blue_vinyl_bold_ps_ot.woff2') format('woff2'),
+         url('../../public/webfontkit-20220927-233145/fontspring-demo-blue_vinyl_bold_ps_ot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    font-family: 'fontspring_demo_-_blue_vinyBd', sans-serif;
+    text-align: center;
+    font-size: 2.7em;
+    color: #252527;
+}
+p{
+    font-size: 2em;
+    text-align: center;
+}
