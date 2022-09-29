@@ -7,6 +7,10 @@ app.use(express.json());
 
 const users = [];
 
+app.get('/api/users', (req, res)=>{
+    res.json(users);
+});
+
 app.post('/api/register', async (req, res) =>{
     try{
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -21,10 +25,20 @@ app.post('/api/register', async (req, res) =>{
     }
 });
 
-
-app.post('/api/login', (req, res)=>{
-    console.log(req.body);
-    res.json({status: "ok"});
+app.post('/api/login', async (req, res)=>{
+    const user = users.find(user => user.email === req.body.email);
+    if(user === null){
+        return res.status(400).send('Cannot find user');
+    }
+    try{
+        if(await bcrypt.compare(req.body.password, user.password)){
+            res.send('Success');
+        } else {
+            res.send('Not Allowed');
+        }
+    } catch(err){
+        res.status(401).send('err');
+    }
 });
 
 app.listen(4000, () => console.log('authentication server is running on port 4000...'));
