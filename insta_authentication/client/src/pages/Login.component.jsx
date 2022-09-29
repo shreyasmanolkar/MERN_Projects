@@ -12,7 +12,7 @@ function Login(){
     async function loginUser(event){
         event.preventDefault();
 
-        const response = await fetch('http://localhost:5000/api/login', {
+        const response = await fetch('http://localhost:4000/api/login', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +24,10 @@ function Login(){
         });
         const data = await response.json();
 
+        console.log(data);
+
         if(data.status){
+            localStorage.setItem("SaveToken", 'Bearer ' + data.saveToken);
             navigate('/');
         }
 

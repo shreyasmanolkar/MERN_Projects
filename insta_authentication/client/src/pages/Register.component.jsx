@@ -14,7 +14,7 @@ function Register(){
     async function registerUser(event){
         event.preventDefault();
 
-        const response = await fetch('http://localhost:5000/api/register', {
+        const response = await fetch('http://localhost:4000/api/register', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -26,10 +26,13 @@ function Register(){
                 password
             })
         });
+
         const data = await response.json();
-        
+        console.log(data);
         if(data.status){
-            navigate('/');
+
+
+            navigate('/login');
         }
     
         setEmail("");
