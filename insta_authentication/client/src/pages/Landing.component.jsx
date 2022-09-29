@@ -1,27 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom";
 import "./Landing.styles.css";
 
-function Landing(){
 
-    // const response = fetch('http://localhost:5000/api/posts', {
-    //     method: "GET",
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     }
-    // });
-
+function Home(){
     return(
         <div>
             <h1>Instagram</h1>
-            <p>Landing</p>
-            {/* {
-                console.log(typeof(response))
-                // response.map((d, index)=>{
-                //     return (<li key={index}>{d.username}</li>)
-                // })
-            } */}
+            <p>Landing Page</p>
         </div>
     )
+};
+    
+function Landing(){
+    // const navigate = useNavigate();
+    // const [access, setAccess] = useState(false);
+
+    // useEffect(()=>{
+    //     if(!access) navigate('/login')
+    // }, [access, navigate]);
+
+    // if(access) return <Home/>;
+    
+    return <Home/>
 }
 
 export default Landing;
