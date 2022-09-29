@@ -1,7 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 app.use(cors());
 app.use(express.json());
@@ -21,19 +22,20 @@ const posts = [
     } 
 ];
 
-app.get('/api/posts', (req, res) => {
+app.get('/api/posts', authenticateToken, (req, res) => {
     res.json(posts);
 });
 
-app.post('/api/register', async (req, res) =>{
-    console.log(req.body);
-    res.json({status: "ok"});
-});
+function authenticateToken(req, res, next){
+    const authHeader = req.headers['authorization'];
+    const token =  authHeader && authHeader.split(' ')[1];
 
-
-app.post('/api/login', (req, res)=>{
-    console.log(req.body);
-    res.json({status: "ok"});
-});
+    if(token === null)return res.sendStatus(401);
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, email) => {
+        if(err) return res.sendStatus(403);
+        req.email = email;
+        next();
+    });
+}
 
 app.listen(5000, () => console.log('server is listining on port 5000...'));
